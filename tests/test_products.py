@@ -83,8 +83,8 @@ def test_list_locations(client):
         return loc
 
     assert sorted(map(remove_id, locs), key=lambda l: l['datetime']) == [
-      {'product_id': 1, 'datetime': '2016-10-12T12:00:00-05:00', 'longitude': 43.2583264, 'latitude': -81.8149807, 'elevation': 500},
-      {'product_id': 1, 'datetime': '2016-10-13T12:00:00-05:00', 'longitude': 42.559112, 'latitude': -79.286693, 'elevation': 550},
-      {'product_id': 1, 'datetime': '2016-10-14T12:00:00-05:00', 'longitude': 43.559112, 'latitude': -85.286693, 'elevation': 600},
-      {'product_id': 1, 'datetime': '2016-10-15T12:00:00-05:00', 'longitude': 42.3119735, 'latitude': -83.0941179, 'elevation': 650},
+      {'product_id': 1, 'datetime': '2016-10-12 17:00:00', 'longitude': 43.2583264, 'latitude': -81.8149807, 'elevation': 500},
+      {'product_id': 1, 'datetime': '2016-10-13 17:00:00', 'longitude': 42.559112, 'latitude': -79.286693, 'elevation': 550},
+      {'product_id': 1, 'datetime': '2016-10-14 17:00:00', 'longitude': 43.559112, 'latitude': -85.286693, 'elevation': 600},
+      {'product_id': 1, 'datetime': '2016-10-15 17:00:00', 'longitude': 42.3119735, 'latitude': -83.0941179, 'elevation': 650},
     ]

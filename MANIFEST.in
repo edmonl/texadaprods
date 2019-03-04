@@ -1,2 +1,2 @@
-include app/schema.sql
+include api/schema.sql
 global-exclude *.pyc
