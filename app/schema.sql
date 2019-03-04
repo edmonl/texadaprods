@@ -1,0 +1,12 @@
+CREATE TABLE product (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  description TEXT NOT NULL
+);
+
+CREATE TABLE location (
+  product_id INTEGER NOT NULL REFERENCES product (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+  datetime TEXT NOT NULL CHECK (DATETIME(datetime) IS NOT NULL),
+  longtitude REAL NOT NULL,
+  latitude REAL NOT NULL,
+  elevation INTEGER NOT NULL
+);
