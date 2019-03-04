@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-from . import db
+from . import db, products
 
 def create_app(config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -16,5 +16,11 @@ def create_app(config=None):
         app.config.from_mapping(config)
 
     db.init_app(app)
+    app.register_blueprint(products.blueprint, url_prefix='/products')
+
+    @app.after_request
+    def json_content_type(res):
+        res.headers.set('Content-Type', 'application/json')
+        return res
 
     return app
