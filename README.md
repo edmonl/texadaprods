@@ -25,7 +25,7 @@ DATABASE=/i/want/to/put/database/to/somewhere/else
 ```
 
 ## API
-Accept and response with `Content-Type: application/json`.
+Accept and respond with `Content-Type: application/json`.
 
 ### Create a product
 ```
