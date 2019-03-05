@@ -60,3 +60,33 @@ Example response body:
   ]
 }
 ```
+
+### Get a product
+```
+GET /products/1
+```
+Example response body:
+```
+{
+  "id": 1,
+  "description": "Fancy 2000"
+}
+```
+
+### Update a product
+```
+PUT /products/1
+```
+Example request body:
+```
+{
+  "id":1,
+  "description": "Fancy 2001"
+}
+```
+
+### Delete a product
+```
+DELETE /products/1
+```
+
