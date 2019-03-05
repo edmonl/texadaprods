@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 from http import HTTPStatus
 from textwrap import dedent
 
@@ -67,10 +68,35 @@ def list():
     prod_id = request.args.get('product_id', type=int)
     if prod_id is None:
         abort(HTTPStatus.BAD_REQUEST)
+    from_dt = request.args.get('from')
+    to_dt = request.args.get('to')
+    if from_dt is None and to_dt is not None:
+        abort(HTTPStatus.BAD_REQUEST)
+    try:
+        if from_dt is not None:
+            from_dt = datetime.fromisoformat(from_dt)
+        if to_dt is not None:
+            to_dt = datetime.fromisoformat(to_dt)
+            if from_dt > to_dt:
+                from_dt, to_dt = to_dt, from_dt
+            to_dt = to_dt.isoformat(' ', 'seconds')
+        if from_dt is not None:
+            from_dt = from_dt.isoformat(' ', 'seconds')
+    except (ValueError, TypeError):
+        abort(HTTPStatus.BAD_REQUEST)
+    query = 'SELECT * FROM location WHERE product_id = ? AND id > ? {} ORDER BY id ASC LIMIT ?'
 
     def execute_cursor(cur, mark, limit):
-        cur.execute('SELECT * FROM location WHERE product_id = ? AND id > ? ORDER BY id ASC LIMIT ?',
-                    (prod_id, mark, limit))
+        if from_dt is None:
+            dt_range = ''
+            query_args = (prod_id, mark, limit)
+        elif to_dt is None:
+            dt_range = 'AND datetime = DATETIME(?)'
+            query_args = (prod_id, mark, from_dt, limit)
+        else:
+            dt_range = 'AND datetime >= DATETIME(?) AND datetime < DATETIME(?)'
+            query_args = (prod_id, mark, from_dt, to_dt, limit)
+        cur.execute(query.format(dt_range), query_args)
 
     return pagination.execute('locations', execute_cursor)
 

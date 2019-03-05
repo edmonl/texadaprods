@@ -65,6 +65,21 @@ def test_list(client):
 
     assert_response(client.get('/locations'), HTTPStatus.BAD_REQUEST)
 
+    locs = get_all_pages(client, '/locations', 'locations', query_params={
+        'product_id': 1,
+        'from': '2016-10-12 12:00:00-05:00',
+    })
+    assert len(locs) == 1
+    assert locs[0] == {'id': 1, 'product_id': 1, 'datetime': '2016-10-12 17:00:00', 'longitude': 43.2583264, 'latitude': -81.8149807, 'elevation': 500}
+
+    locs = get_all_pages(client, '/locations', 'locations', query_params={
+        'product_id': 1,
+        'to': '2016-10-12 12:00:00-05:00',
+        'from': '2016-10-13 12:00:00-05:00',
+    })
+    assert len(locs) == 1
+    assert locs[0] == {'id': 1, 'product_id': 1, 'datetime': '2016-10-12 17:00:00', 'longitude': 43.2583264, 'latitude': -81.8149807, 'elevation': 500}
+
 
 def test_update(client):
     loc = {'datetime': '2018-10-15 17:00:00', 'longitude': 4, 'latitude': -8, 'elevation': 6}
