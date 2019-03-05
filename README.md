@@ -1,4 +1,4 @@
-# Texada Challenge
+# Flask example app
 
 ## Install dependencies
 ```
