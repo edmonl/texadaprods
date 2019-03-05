@@ -90,3 +90,86 @@ Example request body:
 DELETE /products/1
 ```
 
+### Create a location
+```
+POST /locations
+```
+Example request body:
+```
+{
+  "product_id": 1,
+  "datetime": "2010-10-10T08:00:00-04:00",
+  "longitude": 33,
+  "latitude": -33,
+  "elevation": 33
+}
+```
+Example response body:
+```
+{
+  "id": 1,
+  "product_id": 1,
+  "datetime": "2010-10-10T08:00:00-04:00",
+  "longitude": 33,
+  "latitude": -33,
+  "elevation": 33
+}
+```
+
+### Get a location
+```
+GET /locations/1
+```
+Example response body:
+```
+{
+  "id": 1,
+  "product_id": 1,
+  "datetime": "2010-10-10T08:00:00-04:00",
+  "longitude": 33,
+  "latitude": -33,
+  "elevation": 33
+}
+```
+
+### List locations
+```
+GET /locations?mark=0&limit=1000&product_id=1&from=2016-10-12T17:00:00&to=2016-10-13T17:00:00
+```
+Example response body:
+```
+{
+  "pagination": {"next_mark": 3},
+  "locations": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "datetime": "2010-10-10T08:00:00-04:00",
+      "longitude": 33,
+      "latitude": -33,
+      "elevation": 33
+    },
+    ...
+  ]
+}
+```
+
+### Update a location
+```
+PUT /locations/1
+```
+Example request body:
+```
+{
+  "id": 1,
+  "datetime": "2010-10-19T08:00:00-04:00",
+  "longitude": 3,
+  "latitude": -3,
+  "elevation": 3
+}
+```
+
+### Delete a location
+```
+DELETE /locations/1
+```
