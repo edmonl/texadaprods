@@ -14,7 +14,9 @@ $ python -m flask run
 ```
 
 ## Run tests
-`$ python setup.py test`
+```
+$ python setup.py test
+```
 
 ## Configuration
 Optional configuration file `instance/config.py`:
